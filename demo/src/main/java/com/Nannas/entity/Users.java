@@ -8,10 +8,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name="users")
 public class Users {
-	
-	@Column(name="first_name")
+
+	@Column(name ="first_name")
 	private String firstName;
-	
+
 	@Column(name="email")
 	private String email;
 	
@@ -26,37 +26,23 @@ public class Users {
 	public Users(String firstName, String email, String userName, String password) {
 		super();
 		this.firstName = firstName;
-		this.email = email;
+		this.email = email
 		this.userName = userName;
 		this.password = password;
 	}
-
-	
 
 	public Users() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
+	public String getFirstName() { return firstName }
 
+	public void setFirstName(String firstName) { this.firstName = firstName; }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+	public String getEmail() { return email }
 
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
+	public void setEmail(String email) { this.email = email; }
 
 	public String getUserName() {
 		return userName;
