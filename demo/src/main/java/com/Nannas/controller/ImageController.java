@@ -25,17 +25,17 @@ import com.Nannas.repository.ImageRepository;
 public class ImageController {
 	
 	@Autowired
-	private ImageStorageService storageservice;
+	private ImageStorageService storageService;
 	
 	@Autowired
-	ImageRepository imagerepository;
+	ImageRepository imageRepository;
 	
 	@PostMapping("/upload")
 	public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
 		String message = "";
 		
 		try {
-			storageservice.store(file);
+			storageService.store(file);
 			
 			message = "upload file successfully: " + file.getOriginalFilename();
 			return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
@@ -49,7 +49,7 @@ public class ImageController {
 			produces= MediaType.APPLICATION_JSON_VALUE,
 			method= RequestMethod.GET)
 	public ResponseEntity<List<Image>> findAll() {
-		List<Image> file = this.imagerepository.findAll();
+		List<Image> file = this.imageRepository.findAll();
 		
 		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
@@ -59,7 +59,7 @@ public class ImageController {
 			method= RequestMethod.GET)
 	public ResponseEntity<Optional<Image>> findById (String id) {
 		
-		Optional<Image> file = this.imagerepository.findById(id);
+		Optional<Image> file = this.imageRepository.findById(id);
 		
 		return new ResponseEntity<Optional<Image>>(file, HttpStatus.OK);
 	}

@@ -22,16 +22,16 @@ import com.Nannas.repository.AdminUserRepository;
 public class AdminUserController {
 	
 	@Autowired
-	AdminUserRepository adminuserrepository;
+	AdminUserRepository adminUserRepository;
 	
 	@RequestMapping(value="/saveadmin",
 			consumes= MediaType.APPLICATION_JSON_VALUE,
 			produces= MediaType.APPLICATION_JSON_VALUE,
 			method= RequestMethod.POST)
 	
-	public void submitUserDetails(@RequestBody AdminUser adminuser) {
+	public void submitUserDetails(@RequestBody AdminUser adminUser) {
 		
-		adminuserrepository.save(adminuser);
+		adminUserRepository.save(adminuser);
 	}
 	
 	@RequestMapping(value="/findAdminUserById",
@@ -39,9 +39,9 @@ public class AdminUserController {
 			method= RequestMethod.GET)
 	public ResponseEntity<Optional<AdminUser>> findById (String email) {
 		
-		Optional<AdminUser> adminuser = this.adminuserrepository.findById(email);
+		Optional<AdminUser> adminUser = this.adminUserRepository.findById(email);
 		
-		return new ResponseEntity<Optional<AdminUser>>(adminuser, HttpStatus.OK);
+		return new ResponseEntity<Optional<AdminUser>>(adminUser, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/adminLogin",
@@ -49,23 +49,23 @@ public class AdminUserController {
 			method= RequestMethod.POST)
 	
 	public ResponseEntity<AdminUser> login(@RequestBody AdminUser A) {
-		AdminUser adminuser = this.adminuserrepository.login(A.getEmail(), A.getPassword());
+		AdminUser adminUser = this.adminUserRepository.login(A.getEmail(), A.getPassword());
 		
 		if(adminuser == null) {
 			
-			return new ResponseEntity<> (adminuser, HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<> (adminUser, HttpStatus.UNAUTHORIZED);
 		}
 		
-		return new ResponseEntity<> (adminuser, HttpStatus.OK);
+		return new ResponseEntity<> (adminUser, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/find",
 			produces= MediaType.APPLICATION_JSON_VALUE,
 			method= RequestMethod.GET)
 	public ResponseEntity<List<AdminUser>> findAll() {
-		List<AdminUser> adminuser = this.adminuserrepository.findAll();
+		List<AdminUser> adminUser = this.adminUserRepository.findAll();
 		
-		return new ResponseEntity<>(adminuser, HttpStatus.OK);
+		return new ResponseEntity<>(adminUser, HttpStatus.OK);
 	}
 	
 

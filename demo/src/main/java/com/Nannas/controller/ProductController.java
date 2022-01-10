@@ -23,7 +23,7 @@ import com.Nannas.repository.ProductRepository;
 public class ProductController {
 	
 	@Autowired
-	ProductRepository productrepository;
+	ProductRepository productRepository;
 	
 	@RequestMapping(value="/addProduct",
 			consumes= MediaType.APPLICATION_JSON_VALUE,
@@ -32,7 +32,7 @@ public class ProductController {
 	
 	public void submitProductDetails(@RequestBody Product product) {
 		
-		productrepository.save(product);
+		productRepository.save(product);
 	}
 	
 	@RequestMapping(value="/findProductByName",
@@ -40,7 +40,7 @@ public class ProductController {
 			method= RequestMethod.GET)
 	public ResponseEntity<Optional<Product>> findByName (String name) {
 		
-		Optional<Product> product = this.productrepository.findByName(name);
+		Optional<Product> product = this.productRepository.findByName(name);
 		
 		return new ResponseEntity<Optional<Product>>(product, HttpStatus.OK);
 	}
@@ -49,7 +49,7 @@ public class ProductController {
 			produces= MediaType.APPLICATION_JSON_VALUE,
 			method= RequestMethod.GET)
 	public ResponseEntity<List<Product>> findAll() {
-		List<Product> product = this.productrepository.findAll();
+		List<Product> product = this.productRepository.findAll();
 		
 		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
@@ -59,7 +59,7 @@ public class ProductController {
 			method= RequestMethod.DELETE)
 	
 	private void deleteProduct(@RequestParam int productId) {
-		productrepository.deleteById(productId);
+		productRepository.deleteById(productId);
 	}
 
 }

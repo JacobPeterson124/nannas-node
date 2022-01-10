@@ -21,7 +21,7 @@ import com.Nannas.repository.UsersRepository;
 public class UsersController {
 	
 	@Autowired
-	UsersRepository usersrepository;
+	UsersRepository usersRepository;
 	
 	@RequestMapping(value="/save",
 			consumes= MediaType.APPLICATION_JSON_VALUE,
@@ -30,7 +30,7 @@ public class UsersController {
 	
 	public void submitUserDetails(@RequestBody Users users) {
 		
-		usersrepository.save(users);
+		usersRepository.save(users);
 	}
 	
 	@RequestMapping(value="/findUserById",
@@ -38,7 +38,7 @@ public class UsersController {
 			method= RequestMethod.GET)
 	public ResponseEntity<Optional<Users>> findById (String userName) {
 		
-		Optional<Users> user = this.usersrepository.findById(userName);
+		Optional<Users> user = this.usersRepository.findById(userName);
 		
 		return new ResponseEntity<Optional<Users>>(user, HttpStatus.OK);
 	}
@@ -48,7 +48,7 @@ public class UsersController {
 			method= RequestMethod.POST)
 	
 	public ResponseEntity<Users> login(@RequestBody Users U) {
-		Users user = this.usersrepository.login(U.getUserName(), U.getPassword());
+		Users user = this.usersRepository.login(U.getUserName(), U.getPassword());
 		
 		if(user == null) {
 			
@@ -62,7 +62,7 @@ public class UsersController {
 			produces= MediaType.APPLICATION_JSON_VALUE,
 			method= RequestMethod.GET)
 	public ResponseEntity<List<Users>> findAll() {
-		List<Users> user = this.usersrepository.findAll();
+		List<Users> user = this.usersRepository.findAll();
 		
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
